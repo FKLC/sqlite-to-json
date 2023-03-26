@@ -6,7 +6,8 @@ do
     for arch in ${archs[@]}
     do
         echo Starting build for ${os} ${arch}
-        GOOS=${os} GOARCH=${arch} go build -ldflags "-w" -o build/stj_${os}_${arch}
+        CGO_ENABLED=1 GOOS=${os} GOARCH=${arch} go build -ldflags "-w" -o build/stjc_${os}_${arch}
+        CGO_ENABLED=0 GOOS=${os} GOARCH=${arch} go build -ldflags "-w" -o build/stj_${os}_${arch}
         echo Ending build for ${os} ${arch}
     done
 done
